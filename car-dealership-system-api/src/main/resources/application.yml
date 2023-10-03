@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /v1/car-dealership-system-api
+
+spring:
+  application:
+    name: car-dealership-system-api
+  datasource:
+    username: ${DB_USERNAME:localdb}
+    password: ${DB_PASSWORD:localdb}
+    url: ${DB_URL:jdbc:postgresql://localhost:5555/car-dealership-system-db}
