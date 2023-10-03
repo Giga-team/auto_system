@@ -25,3 +25,7 @@ replay_pid*
 
 #Intellij
 .idea
+*.iws
+*.iml
+*.ipr
+
