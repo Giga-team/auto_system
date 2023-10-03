@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  postgres-db:
+    image: postgres
+    container_name: car-dealership-system-db
+    environment:
+      - POSTGRES_USER=localdb
+      - POSTGRES_DB=car-dealership-system-db
+      - POSTGRES_PASSWORD=localdb
+    ports:
+      - "5555:5555"
+    volumes:
+      - car-dealership-system-db-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: localdb
+    ports:
+      - "5050:80"
+
+volumes:
+  car-dealership-system-db-data:
+    driver: local
