@@ -10,3 +10,6 @@ spring:
     username: ${DB_USERNAME:localdb}
     password: ${DB_PASSWORD:localdb}
     url: ${DB_URL:jdbc:postgresql://localhost:5555/car-dealership-system-db}
+  jpa:
+    hibernate:
+      ddl-auto: update
