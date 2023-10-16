@@ -2,8 +2,8 @@ package com.gigateam.cardealershipsystemapi.controller;
 
 import com.gigateam.cardealershipsystemapi.common.dto.ApiResponse;
 import com.gigateam.cardealershipsystemapi.common.dto.Responses;
-import com.gigateam.cardealershipsystemapi.common.dto.client.ClientDto;
-import com.gigateam.cardealershipsystemapi.service.ClientService;
+import com.gigateam.cardealershipsystemapi.common.dto.user.UserDto;
+import com.gigateam.cardealershipsystemapi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,20 +22,20 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class ClientController {
+public class UserController extends AbstractController {
 
-  private final ClientService clientService;
+  private final UserService userService;
 
-  @GetMapping("/client/{id}")
+  @GetMapping("/user/{id}")
   @Operation(
-          tags = {"CLIENT"},
-          summary = "Endpoint to client by id",
+          tags = {"USER"},
+          summary = "Endpoint to retrieve user by id",
           responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ResponseEntity<ApiResponse<ClientDto>> getClientById(@PathVariable("id") Long id) {
-    log.info("Request on retrieving client by id. Id: {}", id);
+  public ResponseEntity<ApiResponse<UserDto>> getUserById(@PathVariable("id") Long id) {
+    log.info("Request on retrieving user by id. Id: {}", id);
 
-    return clientService.getClientById(id)
+    return userService.getUserById(id)
             .map(dto -> new ResponseEntity<>(Responses.ok(dto), HttpStatus.OK))
             .orElseGet(() ->
                     new ResponseEntity<>(
@@ -45,46 +45,46 @@ public class ClientController {
             );
   }
 
-  @PostMapping("/client")
+  @PostMapping("/user")
   @Operation(
-          tags = {"CLIENT"},
-          summary = "Endpoint to create client",
-          requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {@Content(schema = @Schema(implementation = ClientDto.class))}),
+          tags = {"USER"},
+          summary = "Endpoint to create user",
+          requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {@Content(schema = @Schema(implementation = UserDto.class))}),
           responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ResponseEntity<ApiResponse<Long>> createClient(@RequestBody ClientDto dto) {
-    log.info("Request on creating client. Client: {}", dto);
+  public ResponseEntity<ApiResponse<Long>> createUser(@RequestBody UserDto dto) {
+    log.info("Request on creating user. Client: {}", dto);
 
-    Long newId = clientService.createClient(dto);
+    Long newId = userService.createUser(dto);
 
     return new ResponseEntity<>(Responses.created(newId), HttpStatus.CREATED);
   }
 
-  @PutMapping("/client/{id}")
+  @PutMapping("/user/{id}")
   @Operation(
-          tags = {"CLIENT"},
-          summary = "Endpoint to update client",
-          requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {@Content(schema = @Schema(implementation = ClientDto.class))}),
+          tags = {"USER"},
+          summary = "Endpoint to update user",
+          requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {@Content(schema = @Schema(implementation = UserDto.class))}),
           responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ApiResponse<Long> updateClient(@PathVariable("id") Long id, @RequestBody ClientDto dto) {
-    log.info("Request on updating client. Client id: {}, new data: {}", id, dto);
+  public ApiResponse<Long> updateUser(@PathVariable("id") Long id, @RequestBody UserDto dto) {
+    log.info("Request on updating user. User id: {}, new data: {}", id, dto);
 
-    Long updatedId = clientService.updateClient(id, dto);
+    Long updatedId = userService.updateUser(id, dto);
 
     return Responses.ok(updatedId);
   }
 
-  @DeleteMapping("/client/{id}")
+  @DeleteMapping("/user/{id}")
   @Operation(
-          tags = {"CLIENT"},
-          summary = "Endpoint to delete client by id",
+          tags = {"USER"},
+          summary = "Endpoint to delete user by id",
           responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ResponseEntity<ApiResponse<Void>> deleteClientById(@PathVariable("id") Long id) {
-    log.info("Request on deleting client by id. Id: {}", id);
+  public ResponseEntity<ApiResponse<Void>> deleteUserById(@PathVariable("id") Long id) {
+    log.info("Request on deleting user by id. Id: {}", id);
 
-    return clientService.deleteClientById(id)
+    return userService.deleteUserById(id)
             ? new ResponseEntity<>(Responses.noContent(), HttpStatus.NO_CONTENT)
             : new ResponseEntity<>(Responses.notFound(), HttpStatus.NOT_FOUND);
   }

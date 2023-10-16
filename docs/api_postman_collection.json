@@ -109,22 +109,22 @@
 			]
 		},
 		{
-			"name": "Client",
+			"name": "User",
 			"item": [
 				{
-					"name": "Get client by id",
+					"name": "Get user by id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/v1/car-dealership-system-api/client/0",
+							"raw": "{{server}}/v1/car-dealership-system-api/user/0",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"v1",
 								"car-dealership-system-api",
-								"client",
+								"user",
 								"0"
 							]
 						}
@@ -132,7 +132,7 @@
 					"response": []
 				},
 				{
-					"name": "Create new client",
+					"name": "Create new user",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -146,21 +146,21 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/v1/car-dealership-system-api/client",
+							"raw": "{{server}}/v1/car-dealership-system-api/user",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"v1",
 								"car-dealership-system-api",
-								"client"
+								"user"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update existing client",
+					"name": "Update existing user",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -174,35 +174,35 @@
 							}
 						},
 						"url": {
-							"raw": "{{server}}/v1/car-dealership-system-api/client/0",
+							"raw": "{{server}}/v1/car-dealership-system-api/user/1",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"v1",
 								"car-dealership-system-api",
-								"client",
-								"0"
+								"user",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete client by id",
+					"name": "Delete user by id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/v1/car-dealership-system-api/client/0",
+							"raw": "{{server}}/v1/car-dealership-system-api/user/1",
 							"host": [
 								"{{server}}"
 							],
 							"path": [
 								"v1",
 								"car-dealership-system-api",
-								"client",
-								"0"
+								"user",
+								"1"
 							]
 						}
 					},

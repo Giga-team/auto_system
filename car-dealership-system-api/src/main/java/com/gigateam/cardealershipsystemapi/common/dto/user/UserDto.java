@@ -1,9 +1,9 @@
-package com.gigateam.cardealershipsystemapi.common.dto.client;
+package com.gigateam.cardealershipsystemapi.common.dto.user;
 
 import lombok.Data;
 
 @Data
-public class ClientDto {
+public class UserDto {
 
   private Long id;
   private String name;
@@ -11,4 +11,5 @@ public class ClientDto {
   private String address;
   private String phoneNumber;
   private String email;
+
 }
