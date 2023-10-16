@@ -3,10 +3,10 @@ package com.gigateam.cardealershipsystemapi.service.impl;
 
 import com.gigateam.cardealershipsystemapi.common.dto.car.CarDto;
 import com.gigateam.cardealershipsystemapi.domain.Car;
+import com.gigateam.cardealershipsystemapi.exception.NotFoundException;
 import com.gigateam.cardealershipsystemapi.repository.CarRepository;
 import com.gigateam.cardealershipsystemapi.service.CarService;
 import com.gigateam.cardealershipsystemapi.service.mapper.CarMapper;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class DefaultCarService implements CarService {
   @Transactional
   public Long updateCar(Long id, CarDto car) {
     if (!repository.existsById(id)) {
-      throw new NoSuchElementException("todo"); //TODO: handle with custom exception handler(f.e. @ControllerAdvice)
+      throw new NotFoundException(String.format("Car with id: %s not found", id));
     }
 
     Car entity = carMapper.toEntity(car);
