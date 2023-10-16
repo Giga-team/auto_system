@@ -8,6 +8,6 @@ public final class ResponseMessages {
 
   public static final String CAR_BY_ID_NOT_FOUND_FORMAT = "Car with id: %s didn't found";
 
-  public static final String CLIENT_BY_ID_NOT_FOUND_FORMAT = "User with id: %s didn't found";
+  public static final String USER_BY_ID_NOT_FOUND_FORMAT = "User with id: %s didn't found";
 
 }
