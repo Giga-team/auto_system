@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "users")
-public class User {
+public class User { //TODO: integrate this entity with Spring Security in future
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
