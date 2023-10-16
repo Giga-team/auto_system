@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "fc254f91-4474-4f6d-bec6-83c436a63165",
+		"name": "CarDealershipSystemApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19089953"
+	},
+	"item": [
+		{
+			"name": "Car",
+			"item": [
+				{
+					"name": "Get car by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/car/10",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"car",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new car",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"brand\": \"string\",\r\n  \"model\": \"string\",\r\n  \"number\": \"string\",\r\n  \"engineCapacity\": 0,\r\n  \"power\": 0,\r\n  \"maxPassenger\": 0,\r\n  \"gearBox\": \"AUTOMATIC\",\r\n  \"forRent\": true,\r\n  \"price\": 0,\r\n  \"mileage\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/car",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"car"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update existing car",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"brand\": \"string\",\r\n  \"model\": \"string\",\r\n  \"number\": \"string\",\r\n  \"engineCapacity\": 0,\r\n  \"power\": 0,\r\n  \"maxPassenger\": 0,\r\n  \"gearBox\": \"AUTOMATIC\",\r\n  \"forRent\": true,\r\n  \"price\": 0,\r\n  \"mileage\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/car/1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"car",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete car by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/car/10",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"car",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}
