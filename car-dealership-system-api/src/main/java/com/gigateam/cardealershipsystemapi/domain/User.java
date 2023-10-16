@@ -27,7 +27,7 @@ public class User {
     private String address;
 
     @Column(name = "phone_number", nullable = false)
-    private String phoneNumber;
+    private String phoneNumber; //TODO: add pattern to validate format in future
 
     @Column(name = "email", nullable = false)
     private String email;
