@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class CarController {
+public class CarController extends AbstractController {
 
   private final CarService carService;
 
