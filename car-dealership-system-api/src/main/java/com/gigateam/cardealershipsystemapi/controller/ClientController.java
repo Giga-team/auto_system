@@ -70,9 +70,9 @@ public class ClientController {
   public ApiResponse<Long> updateClient(@PathVariable("id") Long id, @RequestBody ClientDto dto) {
     log.info("Request on updating client. Client id: {}, new data: {}", id, dto);
 
-    Long updatedCarId = clientService.updateClient(id, dto);
+    Long updatedId = clientService.updateClient(id, dto);
 
-    return Responses.ok(updatedCarId);
+    return Responses.ok(updatedId);
   }
 
   @DeleteMapping("/client/{id}")
