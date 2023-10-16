@@ -53,7 +53,7 @@ public class UserController extends AbstractController {
           responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
   public ResponseEntity<ApiResponse<Long>> createUser(@RequestBody UserDto dto) {
-    log.info("Request on creating user. Client: {}", dto);
+    log.info("Request on creating user. User: {}", dto);
 
     Long newId = userService.createUser(dto);
 
