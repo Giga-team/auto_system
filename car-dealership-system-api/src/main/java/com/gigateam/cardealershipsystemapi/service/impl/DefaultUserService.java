@@ -28,8 +28,8 @@ public class DefaultUserService implements UserService {
 
   @Override
   @Transactional
-  public Long createUser(UserDto client) {
-    User entity = userMapper.toEntity(client);
+  public Long createUser(UserDto user) {
+    User entity = userMapper.toEntity(user);
 
     return repository.save(entity).getId();
   }
