@@ -1,5 +1,6 @@
 package com.gigateam.cardealershipsystemapi.common.dto;
 
+import com.gigateam.cardealershipsystemapi.exception.RestOperationException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,14 @@ public final class Responses {
 
   public static <T> ApiResponse<T> of(int code, T body) {
     return of(code, "", body);
+  }
+
+  public static <T> ApiResponse<T> of(int code, String message) {
+    return of(code, message, null);
+  }
+
+  public static <T> ApiResponse<T> of(RestOperationException e) {
+    return of(e.getResponseCode(), e.getMessage(), null);
   }
 
   public static <T> ApiResponse<T> of(int code) {
@@ -36,6 +45,10 @@ public final class Responses {
 
   public static <T> ApiResponse<T> noContent() {
     return of(204);
+  }
+
+  public static <T> ApiResponse<T> internalServerError(String message) {
+    return of(500, message);
   }
 
 }
