@@ -7,7 +7,7 @@ public interface UserService {
 
   Optional<UserDto> getUserById(Long id);
 
-  Long createUser(UserDto client);
+  Long createUser(UserDto user);
 
   Long updateUser(Long id, UserDto user);
 
