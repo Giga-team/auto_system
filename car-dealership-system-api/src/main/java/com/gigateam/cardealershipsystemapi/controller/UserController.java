@@ -39,7 +39,7 @@ public class UserController extends AbstractController {
             .map(dto -> new ResponseEntity<>(Responses.ok(dto), HttpStatus.OK))
             .orElseGet(() ->
                     new ResponseEntity<>(
-                            Responses.notFound(String.format(ResponseMessages.CLIENT_BY_ID_NOT_FOUND_FORMAT, id)),
+                            Responses.notFound(String.format(ResponseMessages.USER_BY_ID_NOT_FOUND_FORMAT, id)),
                             HttpStatus.NOT_FOUND
                     )
             );
