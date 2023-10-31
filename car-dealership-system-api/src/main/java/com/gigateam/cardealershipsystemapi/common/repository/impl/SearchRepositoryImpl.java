@@ -22,13 +22,6 @@ public class SearchRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> impl
     this.specificationGenerator = specificationGenerator;
   }
 
-
-
-  @Autowired
-  public void setSpecificationGenerator(SpecificationGenerator specificationGenerator) {
-    this.specificationGenerator = specificationGenerator;
-  }
-
   @Override
   public List<T> findAllByRsqlQuery(String query) {
     Specification<T> specification = specificationGenerator.getSpecification(query);
