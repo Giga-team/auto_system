@@ -7,6 +7,7 @@ import com.gigateam.cardealershipsystemapi.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -87,6 +89,18 @@ public class CarController extends AbstractController {
     return carService.deleteCarById(id)
         ? new ResponseEntity<>(Responses.noContent(), HttpStatus.NO_CONTENT)
         : new ResponseEntity<>(Responses.notFound(), HttpStatus.NOT_FOUND);
+  }
+
+  @GetMapping("/car/page")
+  @Operation(
+      tags = {"CAR"},
+      summary = "Endpoint to retrieve cars by rsql query",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<List<CarDto>> getCarsPage(@RequestParam("query") String query) {
+    log.info("Request on retrieving cars page. Query: {}", query);
+
+    return Responses.ok(carService.getCarsPage(query));
   }
 
 }

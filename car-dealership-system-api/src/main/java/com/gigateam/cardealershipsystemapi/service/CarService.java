@@ -1,6 +1,7 @@
 package com.gigateam.cardealershipsystemapi.service;
 
 import com.gigateam.cardealershipsystemapi.common.dto.car.CarDto;
+import java.util.List;
 import java.util.Optional;
 
 public interface CarService {
@@ -12,5 +13,7 @@ public interface CarService {
   Long updateCar(Long id, CarDto car);
 
   boolean deleteCarById(Long id);
+
+  List<CarDto> getCarsPage(String query);
 
 }
