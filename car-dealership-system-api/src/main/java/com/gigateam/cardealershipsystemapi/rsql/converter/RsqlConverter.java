@@ -1,4 +1,4 @@
-package com.gigateam.cardealershipsystemapi.rsql.conterter;
+package com.gigateam.cardealershipsystemapi.rsql.converter;
 
 public interface RsqlConverter<T> {
 

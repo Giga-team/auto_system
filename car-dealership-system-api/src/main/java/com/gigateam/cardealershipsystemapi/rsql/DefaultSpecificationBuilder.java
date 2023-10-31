@@ -1,6 +1,6 @@
 package com.gigateam.cardealershipsystemapi.rsql;
 
-import com.gigateam.cardealershipsystemapi.rsql.conterter.RsqlConverter;
+import com.gigateam.cardealershipsystemapi.rsql.converter.RsqlConverter;
 import cz.jirutka.rsql.parser.ast.ComparisonNode;
 import cz.jirutka.rsql.parser.ast.LogicalNode;
 import cz.jirutka.rsql.parser.ast.LogicalOperator;

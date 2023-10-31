@@ -3,7 +3,7 @@ package com.gigateam.cardealershipsystemapi.config;
 import com.gigateam.cardealershipsystemapi.rsql.DefaultRsqlVisitor;
 import com.gigateam.cardealershipsystemapi.rsql.DefaultSpecificationBuilder;
 import com.gigateam.cardealershipsystemapi.rsql.SpecificationGenerator;
-import com.gigateam.cardealershipsystemapi.rsql.conterter.RsqlConverter;
+import com.gigateam.cardealershipsystemapi.rsql.converter.RsqlConverter;
 import cz.jirutka.rsql.parser.RSQLParser;
 import java.util.List;
 import org.springframework.context.annotation.Bean;

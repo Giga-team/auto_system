@@ -1,6 +1,6 @@
-package com.gigateam.cardealershipsystemapi.rsql.conterter.impl;
+package com.gigateam.cardealershipsystemapi.rsql.converter.impl;
 
-import com.gigateam.cardealershipsystemapi.rsql.conterter.RsqlConverter;
+import com.gigateam.cardealershipsystemapi.rsql.converter.RsqlConverter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Component;
