@@ -7,7 +7,9 @@ import com.gigateam.cardealershipsystemapi.exception.NotFoundException;
 import com.gigateam.cardealershipsystemapi.repository.CarRepository;
 import com.gigateam.cardealershipsystemapi.service.CarService;
 import com.gigateam.cardealershipsystemapi.service.mapper.CarMapper;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +53,13 @@ public class DefaultCarService implements CarService {
   @Transactional
   public boolean deleteCarById(Long id) {
     return repository.deleteCarById(id) > 0;
+  }
+
+  @Override
+  public List<CarDto> getCarsPage(String query) {
+    return repository.findAllByRsqlQuery(query).stream()
+        .map(carMapper::toDto)
+        .collect(Collectors.toList());
   }
 
 }

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3af66bc6-3a2b-42ee-9c14-4c9918df8e21",
+		"_postman_id": "d9533738-e1eb-4949-9d05-1cd4a5da0953",
 		"name": "CarDealershipSystemApi",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25774057"
+		"_exporter_id": "19089953"
 	},
 	"item": [
 		{
@@ -101,6 +101,32 @@
 								"car-dealership-system-api",
 								"car",
 								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get page of cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/car/page?query=id=in=(1,8);forRent==false;model=='*goo'",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"car",
+								"page"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "id=in=(1,8);forRent==false;model=='*goo'"
+								}
 							]
 						}
 					},
