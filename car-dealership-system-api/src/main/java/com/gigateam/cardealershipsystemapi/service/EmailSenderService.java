@@ -1,6 +1,7 @@
 package com.gigateam.cardealershipsystemapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -10,19 +11,21 @@ public class EmailSenderService {
   @Autowired
   private JavaMailSender mailSender;
 
+  @Value("${MAIL_USERNAME}")
+  private String emailSender;
+
   public void sendSimpleEmail(String toEmail,
                               String subject,
                               String body
   ) {
     SimpleMailMessage message = new SimpleMailMessage();
-    message.setFrom("technodrift.gg@gmail.com");
+    message.setFrom(emailSender);
     message.setTo(toEmail);
     message.setText(body);
     message.setSubject(subject);
     mailSender.send(message);
+
     System.out.println("Mail send to: " + toEmail);
-
-
   }
 
 }
