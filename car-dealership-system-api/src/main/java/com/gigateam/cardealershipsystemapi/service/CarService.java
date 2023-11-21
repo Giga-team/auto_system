@@ -14,6 +14,6 @@ public interface CarService {
 
   boolean deleteCarById(Long id);
 
-  List<CarDto> getCarsPage(String query);
+  List<CarDto> getCarsPage(String query, int page, int limit);
 
 }

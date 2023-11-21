@@ -56,8 +56,8 @@ public class DefaultCarService implements CarService {
   }
 
   @Override
-  public List<CarDto> getCarsPage(String query) {
-    return repository.findAllByRsqlQuery(query).stream()
+  public List<CarDto> getCarsPage(String query, int page, int limit) {
+    return repository.findAll(query, page, limit).stream()
         .map(carMapper::toDto)
         .collect(Collectors.toList());
   }

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -97,10 +98,17 @@ public class CarController extends AbstractController {
       summary = "Endpoint to retrieve cars by rsql query",
       responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ApiResponse<List<CarDto>> getCarsPage(@RequestParam("query") String query) {
-    log.info("Request on retrieving cars page. Query: {}", query);
+  public ApiResponse<List<CarDto>> getCarsPage(
+      @RequestParam(value = "query", defaultValue = "") String query,
+      @RequestParam("page") Optional<Integer> pageParameter,
+      @RequestParam("limit") Optional<Integer> limitParameter
+  ) {
+    int page = pageParameter.orElse(DEFAULT_PAGE_PARAMETER);
+    int limit = limitParameter.orElse(DEFAULT_LIMIT_PARAMETER);
 
-    return Responses.ok(carService.getCarsPage(query));
+    log.info("Request on retrieving cars page. Query: {}, page: {}, limit: {}", query, page, limit);
+
+    return Responses.ok(carService.getCarsPage(query, page, limit));
   }
 
 }
