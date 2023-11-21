@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 import lombok.Data;
 
@@ -20,14 +21,14 @@ public class Car {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(name = "article", nullable = false, unique = true)
+  private String article;
+
   @Column(name = "brand", nullable = false)
   private String brand;
 
   @Column(name = "model", nullable = false)
   private String model;
-
-  @Column(name = "number", nullable = false)
-  private String number; //AA1234BB
 
   @Column(name = "engine_capacity", nullable = false)
   private double engineCapacity;
@@ -35,20 +36,18 @@ public class Car {
   @Column(name = "power", nullable = false)
   private int power;
 
-  @Column(name = "max_passanger", nullable = false)
-  private int maxPassenger;
+  @Column(name = "number_of_seats", nullable = false)
+  private int numberOfSeats;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "gear_box", nullable = false)
   private GearBox gearBox;
 
-  @Column(name = "for_rent", nullable = false)
-  private boolean forRent;
-
   @Column(name = "price", nullable = false)
   private BigDecimal price;
 
-  @Column(name = "mileage", nullable = false)
-  private int mileage;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "status", nullable = false)
+  private CarStatus status;
 
 }
