@@ -6,6 +6,10 @@ public enum OrderStatus {
   IN_PROGRESS,
   IN_PLACE,
   COMPLETE,
-  CANCELED
+  CANCELLED;
+
+  public boolean isCancelled() {
+    return CANCELLED.equals(this);
+  }
 
 }

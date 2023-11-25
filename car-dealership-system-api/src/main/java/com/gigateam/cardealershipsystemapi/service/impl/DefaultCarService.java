@@ -3,6 +3,7 @@ package com.gigateam.cardealershipsystemapi.service.impl;
 
 import com.gigateam.cardealershipsystemapi.common.dto.car.CarDto;
 import com.gigateam.cardealershipsystemapi.domain.Car;
+import com.gigateam.cardealershipsystemapi.domain.CarStatus;
 import com.gigateam.cardealershipsystemapi.exception.NotFoundException;
 import com.gigateam.cardealershipsystemapi.repository.CarRepository;
 import com.gigateam.cardealershipsystemapi.service.CarService;
@@ -60,6 +61,16 @@ public class DefaultCarService implements CarService {
     return repository.findAll(query, page, limit).stream()
         .map(carMapper::toDto)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public void markCarAsSold(Long carId) {
+    repository.setCarStatus(carId, CarStatus.SOLD);
+  }
+
+  @Override
+  public void markCarAsAvailable(Long carId) {
+    repository.setCarStatus(carId, CarStatus.AVAILABLE);
   }
 
 }

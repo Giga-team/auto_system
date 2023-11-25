@@ -7,28 +7,25 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "orders")
+@NoArgsConstructor
 public class Order {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @OneToOne(targetEntity = Car.class)
-  @JoinColumn(name = "car_id")
+  @Column(name = "car_id", nullable = false)
   private Long carId;
 
-  @ManyToOne(targetEntity = User.class)
-  @JoinColumn(name = "user_id")
+  @Column(name = "user_id", nullable = false)
   private Long userId;
 
   @Enumerated(EnumType.STRING)
@@ -37,5 +34,18 @@ public class Order {
 
   @Column(name = "creation_date", nullable = false)
   private LocalDateTime creationDate;
+
+  public Order(Long carId, Long userId) {
+    this.carId = carId;
+    this.userId = userId;
+  }
+
+  public boolean isCancelled() {
+    return status.isCancelled();
+  }
+
+  public boolean isNotCancelled() {
+    return !isCancelled();
+  }
 
 }

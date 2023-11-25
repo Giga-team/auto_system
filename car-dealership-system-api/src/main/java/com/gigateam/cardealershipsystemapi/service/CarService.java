@@ -16,4 +16,8 @@ public interface CarService {
 
   List<CarDto> getCarsPage(String query, int page, int limit);
 
+  void markCarAsSold(Long carId);
+
+  void markCarAsAvailable(Long carId);
+
 }
