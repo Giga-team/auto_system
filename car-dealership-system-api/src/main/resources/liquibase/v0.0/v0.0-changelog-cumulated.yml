@@ -1,5 +1,5 @@
 databaseChangeLog:
-  - changeSet: # Add constraints to tables
+  - changeSet: # Add constraints to `orders` table
       id: 1
       author: prokopchuk
       runOnChange: false

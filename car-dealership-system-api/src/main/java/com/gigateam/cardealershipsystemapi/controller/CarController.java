@@ -29,7 +29,7 @@ public class CarController extends AbstractController {
 
   private final CarService carService;
 
-  @GetMapping("/car/{id}")
+  @GetMapping("/cars/{id}")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to car by id",
@@ -48,7 +48,7 @@ public class CarController extends AbstractController {
         );
   }
 
-  @PostMapping("/car")
+  @PostMapping("/cars")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to create car",
@@ -63,7 +63,7 @@ public class CarController extends AbstractController {
     return new ResponseEntity<>(Responses.created(newId), HttpStatus.CREATED);
   }
 
-  @PutMapping("/car/{id}")
+  @PutMapping("/cars/{id}")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to update car",
@@ -78,7 +78,7 @@ public class CarController extends AbstractController {
     return Responses.ok(updatedCarId);
   }
 
-  @DeleteMapping("/car/{id}")
+  @DeleteMapping("/cars/{id}")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to delete car by id",
@@ -92,7 +92,7 @@ public class CarController extends AbstractController {
         : new ResponseEntity<>(Responses.notFound(), HttpStatus.NOT_FOUND);
   }
 
-  @GetMapping("/car/page")
+  @GetMapping("/cars/page")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to retrieve cars by rsql query",

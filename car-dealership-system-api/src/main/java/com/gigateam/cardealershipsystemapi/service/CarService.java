@@ -20,4 +20,8 @@ public interface CarService {
 
   void markCarAsAvailable(Long carId);
 
+  boolean carExistsById(Long carId);
+
+  boolean carNotExistsById(Long carId);
+
 }

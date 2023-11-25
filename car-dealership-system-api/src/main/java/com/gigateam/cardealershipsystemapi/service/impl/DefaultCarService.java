@@ -33,6 +33,7 @@ public class DefaultCarService implements CarService {
   @Transactional
   public Long createCar(CarDto car) {
     Car entity = carMapper.toEntity(car);
+    entity.setStatus(CarStatus.AVAILABLE);
 
     return repository.save(entity).getId();
   }
@@ -71,6 +72,16 @@ public class DefaultCarService implements CarService {
   @Override
   public void markCarAsAvailable(Long carId) {
     repository.setCarStatus(carId, CarStatus.AVAILABLE);
+  }
+
+  @Override
+  public boolean carExistsById(Long carId) {
+    return repository.existsById(carId);
+  }
+
+  @Override
+  public boolean carNotExistsById(Long carId) {
+    return !carExistsById(carId);
   }
 
 }
