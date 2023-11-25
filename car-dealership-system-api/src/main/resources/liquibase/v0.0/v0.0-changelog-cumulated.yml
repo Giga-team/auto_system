@@ -6,4 +6,4 @@ databaseChangeLog:
       changes:
         - sqlFile:
             relativeToChangelogFile: true
-            path: 0001-add-constraints.sql
+            path: 0001-add-constraints-to-orders-table.sql
