@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet: # Add constraints to tables
+      id: 1
+      author: prokopchuk
+      runOnChange: false
+      changes:
+        - sqlFile:
+            relativeToChangelogFile: true
+            path: 0001-add-constraints.sql
