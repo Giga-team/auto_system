@@ -1,14 +1,19 @@
 package com.gigateam.cardealershipsystemapi.service.impl;
 
+import com.gigateam.cardealershipsystemapi.common.dto.order.FullOrderDto;
 import com.gigateam.cardealershipsystemapi.domain.Order;
 import com.gigateam.cardealershipsystemapi.domain.OrderStatus;
 import com.gigateam.cardealershipsystemapi.exception.BadRequestException;
 import com.gigateam.cardealershipsystemapi.repository.OrderRepository;
+import com.gigateam.cardealershipsystemapi.repository.VwOrderRepository;
 import com.gigateam.cardealershipsystemapi.service.CarService;
 import com.gigateam.cardealershipsystemapi.service.OrderService;
 import com.gigateam.cardealershipsystemapi.service.UserService;
 import com.gigateam.cardealershipsystemapi.service.mapper.OrderMapper;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DefaultOrderService implements OrderService {
 
   private final OrderRepository orderRepository;
+  private final VwOrderRepository vwOrderRepository;
   private final OrderMapper orderMapper;
   private final CarService carService;
   private final UserService userService;
@@ -63,6 +69,19 @@ public class DefaultOrderService implements OrderService {
     order.setCreationDate(LocalDateTime.now());
 
     return order;
+  }
+
+  @Override
+  public Optional<FullOrderDto> getOrderById(Long id) {
+    return vwOrderRepository.findById(id)
+        .map(orderMapper::toDto);
+  }
+
+  @Override
+  public List<FullOrderDto> getOrdersPage(String query, int page, int limit) {
+    return vwOrderRepository.findAll(query, page, limit).stream()
+        .map(orderMapper::toDto)
+        .collect(Collectors.toList());
   }
 
 }
