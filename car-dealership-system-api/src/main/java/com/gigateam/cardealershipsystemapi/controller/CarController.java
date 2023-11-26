@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class CarController extends AbstractController {
 
   private final CarService carService;
 
-  @GetMapping("/car/{id}")
+  @GetMapping("/cars/{id}")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to car by id",
@@ -47,7 +48,7 @@ public class CarController extends AbstractController {
         );
   }
 
-  @PostMapping("/car")
+  @PostMapping("/cars")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to create car",
@@ -62,7 +63,7 @@ public class CarController extends AbstractController {
     return new ResponseEntity<>(Responses.created(newId), HttpStatus.CREATED);
   }
 
-  @PutMapping("/car/{id}")
+  @PutMapping("/cars/{id}")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to update car",
@@ -77,7 +78,7 @@ public class CarController extends AbstractController {
     return Responses.ok(updatedCarId);
   }
 
-  @DeleteMapping("/car/{id}")
+  @DeleteMapping("/cars/{id}")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to delete car by id",
@@ -91,16 +92,23 @@ public class CarController extends AbstractController {
         : new ResponseEntity<>(Responses.notFound(), HttpStatus.NOT_FOUND);
   }
 
-  @GetMapping("/car/page")
+  @GetMapping("/cars/page")
   @Operation(
       tags = {"CAR"},
       summary = "Endpoint to retrieve cars by rsql query",
       responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ApiResponse<List<CarDto>> getCarsPage(@RequestParam("query") String query) {
-    log.info("Request on retrieving cars page. Query: {}", query);
+  public ApiResponse<List<CarDto>> getCarsPage(
+      @RequestParam(value = "query", defaultValue = "") String query,
+      @RequestParam("page") Optional<Integer> pageParameter,
+      @RequestParam("limit") Optional<Integer> limitParameter
+  ) {
+    int page = pageParameter.orElse(DEFAULT_PAGE_PARAMETER);
+    int limit = limitParameter.orElse(DEFAULT_LIMIT_PARAMETER);
 
-    return Responses.ok(carService.getCarsPage(query));
+    log.info("Request on retrieving cars page. Query: {}, page: {}, limit: {}", query, page, limit);
+
+    return Responses.ok(carService.getCarsPage(query, page, limit));
   }
 
 }

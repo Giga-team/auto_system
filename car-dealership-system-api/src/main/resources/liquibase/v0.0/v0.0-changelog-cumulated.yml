@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet: # Add constraints to `orders` table
+      id: 1
+      author: prokopchuk
+      runOnChange: false
+      changes:
+        - sqlFile:
+            relativeToChangelogFile: true
+            path: 0001-add-constraints-to-orders-table.sql
+
+  - changeSet: # Create `vw_orders`
+      id: 2
+      author: prokopchuk
+      runOnChange: true
+      changes:
+        - sqlFile:
+            relativeToChangelogFile: true
+            path: 0002-create-vw_orders.sql

@@ -53,4 +53,14 @@ public class DefaultUserService implements UserService {
     return repository.deleteUserById(id) > 0;
   }
 
+  @Override
+  public boolean userExistsById(Long userId) {
+    return repository.existsById(userId);
+  }
+
+  @Override
+  public boolean userNotExistsById(Long userId) {
+    return !userExistsById(userId);
+  }
+
 }

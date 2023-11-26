@@ -7,7 +7,9 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface SearchRepository<T, ID> extends JpaRepository<T, ID> {
 
-  List<T> findAllByRsqlQuery(String query);
+  List<T> findAll(String query);
+
+  List<T> findAll(String query, int page, int limit);
 
 //  List<T> findAll(String query, Pageable pageable);
 

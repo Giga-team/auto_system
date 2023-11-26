@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 public abstract class AbstractController {
 
+  protected static final int DEFAULT_PAGE_PARAMETER = 0;
+  protected static final int DEFAULT_LIMIT_PARAMETER = 10;
   private static final String SOMETHING_WENT_WRONG = "Something went wrong";
+
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiResponse<Void>> handleException(Exception e) {

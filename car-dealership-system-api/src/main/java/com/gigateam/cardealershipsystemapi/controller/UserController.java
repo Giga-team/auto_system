@@ -26,7 +26,7 @@ public class UserController extends AbstractController {
 
   private final UserService userService;
 
-  @GetMapping("/user/{id}")
+  @GetMapping("/users/{id}")
   @Operation(
           tags = {"USER"},
           summary = "Endpoint to retrieve user by id",
@@ -45,7 +45,7 @@ public class UserController extends AbstractController {
             );
   }
 
-  @PostMapping("/user")
+  @PostMapping("/users")
   @Operation(
           tags = {"USER"},
           summary = "Endpoint to create user",
@@ -60,7 +60,7 @@ public class UserController extends AbstractController {
     return new ResponseEntity<>(Responses.created(newId), HttpStatus.CREATED);
   }
 
-  @PutMapping("/user/{id}")
+  @PutMapping("/users/{id}")
   @Operation(
           tags = {"USER"},
           summary = "Endpoint to update user",
@@ -75,7 +75,7 @@ public class UserController extends AbstractController {
     return Responses.ok(updatedId);
   }
 
-  @DeleteMapping("/user/{id}")
+  @DeleteMapping("/users/{id}")
   @Operation(
           tags = {"USER"},
           summary = "Endpoint to delete user by id",
