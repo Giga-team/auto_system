@@ -1,9 +1,19 @@
 package com.gigateam.cardealershipsystemapi.service;
 
+import com.gigateam.cardealershipsystemapi.common.dto.auth.CreateUserRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.user.UserDto;
+import com.gigateam.cardealershipsystemapi.domain.UserRole;
 import java.util.Optional;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
+
+  Optional<UserDetails> getUserByEmail(String email);
+
+  void createUser(CreateUserRequest request);
+
+  void createUser(CreateUserRequest request, UserRole role);
 
   Optional<UserDto> getUserById(Long id);
 

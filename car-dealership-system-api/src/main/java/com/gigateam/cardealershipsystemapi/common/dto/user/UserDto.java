@@ -1,15 +1,20 @@
 package com.gigateam.cardealershipsystemapi.common.dto.user;
 
+import com.gigateam.cardealershipsystemapi.domain.UserRole;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
 
-  private Long id;
-  private String name;
-  private String surname;
-  private String address;
-  private String phoneNumber;
-  private String email;
+  protected Long id;
+  protected String name;
+  protected String surname;
+  protected String phoneNumber;
+  protected String email;
+  protected UserRole userRole;
 
 }

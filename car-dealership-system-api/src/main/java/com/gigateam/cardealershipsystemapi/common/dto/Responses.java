@@ -43,12 +43,20 @@ public final class Responses {
     return of(201, body);
   }
 
+  public static <T> ApiResponse<T> created() {
+    return of(201, null);
+  }
+
   public static <T> ApiResponse<T> noContent() {
     return of(204);
   }
 
   public static <T> ApiResponse<T> internalServerError(String message) {
     return of(500, message);
+  }
+
+  public static <T> ApiResponse<T> forbidden(String message) {
+    return of(403, message);
   }
 
 }
