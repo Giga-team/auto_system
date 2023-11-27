@@ -30,3 +30,7 @@ spring:
         smtp:
           auth: true
           starttls.enable: true
+
+jwt:
+  secret-key: ${JWT_SECRET:a116709d7088c04cb59aef08a74774b8849ffc8b2a8a52ac68eeea31868863cb015a4028e9e96733c852fbb3fe3e38450c98d6aea9f496227ae6734329d6ea32}
+  expiration-milliseconds: ${JWT_EXPIRATION_MILLISECONDS:86400000} # default: 1000 * 60 * 60 * 24
