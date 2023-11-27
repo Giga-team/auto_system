@@ -32,7 +32,7 @@ public class CarController extends AbstractController {
   @GetMapping("/cars/{id}")
   @Operation(
       tags = {"CAR"},
-      summary = "Endpoint to car by id",
+      summary = "Endpoint to retrieve car by id",
       responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
   public ResponseEntity<ApiResponse<CarDto>> getCarById(@PathVariable("id") Long id) {
@@ -109,6 +109,18 @@ public class CarController extends AbstractController {
     log.info("Request on retrieving cars page. Query: {}, page: {}, limit: {}", query, page, limit);
 
     return Responses.ok(carService.getCarsPage(query, page, limit));
+  }
+
+  @GetMapping("/cars/count")
+  @Operation(
+      tags = {"CAR"},
+      summary = "Endpoint to retrieve cars count by rsql query",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Long> getCarsCount(@RequestParam(value = "query", defaultValue = "") String query) {
+    log.info("Request on retrieving cars count. Query: {}", query);
+
+    return Responses.ok(carService.getCarsCount(query));
   }
 
 }

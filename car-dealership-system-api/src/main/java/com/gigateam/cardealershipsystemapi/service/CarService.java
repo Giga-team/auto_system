@@ -24,4 +24,6 @@ public interface CarService {
 
   boolean carNotExistsById(Long carId);
 
+  Long getCarsCount(String query);
+
 }

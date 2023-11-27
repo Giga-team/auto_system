@@ -84,4 +84,9 @@ public class DefaultCarService implements CarService {
     return !carExistsById(carId);
   }
 
+  @Override
+  public Long getCarsCount(String query) {
+    return repository.count(query);
+  }
+
 }

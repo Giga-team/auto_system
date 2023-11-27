@@ -11,6 +11,6 @@ public interface SearchRepository<T, ID> extends JpaRepository<T, ID> {
 
   List<T> findAll(String query, int page, int limit);
 
-//  List<T> findAll(String query, Pageable pageable);
+  Long count(String query);
 
 }
