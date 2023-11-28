@@ -264,7 +264,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{server}}/v1/car-dealership-system-api/users/1",
+							"raw": "{{server}}/v1/car-dealership-system-api/users/10",
 							"host": [
 								"{{server}}"
 							],
@@ -272,7 +272,117 @@
 								"v1",
 								"car-dealership-system-api",
 								"users",
-								"1"
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new manager",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Manager\",\r\n  \"surname\": \"Manager\",\r\n  \"phoneNumber\": \"11111\",\r\n  \"email\": \"manager1@gmail.com\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/users/managers",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"users",
+								"managers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get random manager",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/users/managers/random",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"users",
+								"managers",
+								"random"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get page of users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/users/page?page=0&limit=5&query=role=out=('ADMIN')",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"users",
+								"page"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "query",
+									"value": "role=out=('ADMIN')"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/users/count?query=role=out=('ADMIN')",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"users",
+								"count"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "role=out=('ADMIN')"
+								}
 							]
 						}
 					},
@@ -290,7 +400,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"carId\": 6,\r\n  \"userId\": 1\r\n}",
+							"raw": "{\r\n  \"carId\": 6,\r\n  \"userId\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -364,6 +474,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get orders count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/orders/count?query=status=in=('CREATED')",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"orders",
+								"count"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "status=in=('CREATED')"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -377,7 +513,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"viktor@gmail.com\",\r\n  \"password\": \"12345\"\r\n}",
+							"raw": "{\r\n  \"email\": \"manager@gmail.com\",\r\n  \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
