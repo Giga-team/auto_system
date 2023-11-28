@@ -500,6 +500,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Change order status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"IN_PLACE\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/orders/9/status",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"orders",
+								"9",
+								"status"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -513,7 +543,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"manager@gmail.com\",\r\n  \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\": \"11111\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -542,7 +572,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Viktor\",\r\n  \"surname\": \"Long\",\r\n  \"phoneNumber\": \"123456\",\r\n  \"email\": \"viktor@gmail.com\",\r\n  \"password\": \"12345\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Viktor\",\r\n  \"surname\": \"Long\",\r\n  \"phoneNumber\": \"111\",\r\n  \"email\": \"test@gmail.com\",\r\n  \"password\": \"11111\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -559,6 +589,36 @@
 								"car-dealership-system-api",
 								"auth",
 								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get signed-in user details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsImlkIjoxMiwibmFtZSI6IlZpa3RvciIsInN1cm5hbWUiOiJMb25nIiwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTcwMTIxMzU4MSwiZXhwIjoxNzAxMjk5OTgxfQ.PB7cgCpOIC5o-rFviAD03tsQxmM1DRcJrFS9O5Vp8hojMzCJCq24Ch_hc73_aCe_gPYlyk-DHjIIq5_nPSVnRA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/v1/car-dealership-system-api/auth/me",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"v1",
+								"car-dealership-system-api",
+								"auth",
+								"me"
 							]
 						}
 					},
