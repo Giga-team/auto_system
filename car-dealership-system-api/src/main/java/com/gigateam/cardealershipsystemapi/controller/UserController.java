@@ -8,6 +8,8 @@ import com.gigateam.cardealershipsystemapi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -115,6 +118,25 @@ public class UserController extends AbstractController {
     log.info("Request on retrieving random manager");
 
     return Responses.ok(userService.getRandomManager());
+  }
+
+  @GetMapping("/users/page")
+  @Operation(
+      tags = {"USER"},
+      summary = "Endpoint to retrieve users by rsql query",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<List<UserDto>> getUsersPage(
+      @RequestParam(value = "query", defaultValue = "") String query,
+      @RequestParam("page") Optional<Integer> pageParameter,
+      @RequestParam("limit") Optional<Integer> limitParameter
+  ) {
+    int page = pageParameter.orElse(DEFAULT_PAGE_PARAMETER);
+    int limit = limitParameter.orElse(DEFAULT_LIMIT_PARAMETER);
+
+    log.info("Request on retrieving users page. Query: {}, page: {}, limit: {}", query, page, limit);
+
+    return Responses.ok(userService.getUsersPage(query, page, limit));
   }
 
 }

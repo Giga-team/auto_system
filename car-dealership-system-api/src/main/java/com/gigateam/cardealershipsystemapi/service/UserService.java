@@ -3,6 +3,7 @@ package com.gigateam.cardealershipsystemapi.service;
 import com.gigateam.cardealershipsystemapi.common.dto.auth.CreateUserRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.user.UserDto;
 import com.gigateam.cardealershipsystemapi.domain.UserRole;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,5 +31,7 @@ public interface UserService extends UserDetailsService {
   boolean userNotExistsById(Long userId);
 
   UserDto getRandomManager();
+
+  List<UserDto> getUsersPage(String query, int page, int limit);
 
 }

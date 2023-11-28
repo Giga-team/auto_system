@@ -20,7 +20,7 @@ public class LoginResponse extends UserDto {
     this.surname = userDetails.getSurname();
     this.phoneNumber = userDetails.getPhoneNumber();
     this.email = userDetails.getEmail();
-    this.userRole = role;
+    this.role = role;
     this.token = token;
   }
 

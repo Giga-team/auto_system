@@ -11,7 +11,9 @@ import com.gigateam.cardealershipsystemapi.repository.UserRepository;
 import com.gigateam.cardealershipsystemapi.security.DefaultUserDetails;
 import com.gigateam.cardealershipsystemapi.service.UserService;
 import com.gigateam.cardealershipsystemapi.service.mapper.UserMapper;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -130,6 +132,13 @@ public class DefaultUserService implements UserService {
     return repository.findRandomManager()
         .map(userMapper::toDto)
         .orElseThrow(() -> new NotFoundException("There isn't any manager in database"));
+  }
+
+  @Override
+  public List<UserDto> getUsersPage(String query, int page, int limit) {
+    return repository.findAll(query, page, limit).stream()
+        .map(userMapper::toDto)
+        .collect(Collectors.toList());
   }
 
 }

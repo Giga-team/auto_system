@@ -15,6 +15,6 @@ public class UserDto {
   protected String surname;
   protected String phoneNumber;
   protected String email;
-  protected UserRole userRole;
+  protected UserRole role;
 
 }
