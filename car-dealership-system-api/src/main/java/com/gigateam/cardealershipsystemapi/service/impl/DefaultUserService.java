@@ -60,6 +60,12 @@ public class DefaultUserService implements UserService {
     repository.save(user);
   }
 
+  @Override
+  @Transactional
+  public void createManager(CreateUserRequest request) {
+    createUser(request, UserRole.MANAGER);
+  }
+
   private void validateEmailUniqueness(String email) {
     boolean alreadyExists = repository.existsByEmail(email);
 

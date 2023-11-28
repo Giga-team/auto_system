@@ -2,6 +2,7 @@ package com.gigateam.cardealershipsystemapi.controller;
 
 import com.gigateam.cardealershipsystemapi.common.dto.ApiResponse;
 import com.gigateam.cardealershipsystemapi.common.dto.Responses;
+import com.gigateam.cardealershipsystemapi.common.dto.auth.CreateUserRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.user.UserDto;
 import com.gigateam.cardealershipsystemapi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -87,6 +88,21 @@ public class UserController extends AbstractController {
     return userService.deleteUserById(id)
             ? new ResponseEntity<>(Responses.noContent(), HttpStatus.NO_CONTENT)
             : new ResponseEntity<>(Responses.notFound(), HttpStatus.NOT_FOUND);
+  }
+
+  @PostMapping("/users/managers")
+  @Operation(
+      tags = {"USER"},
+      summary = "Endpoint to create manager",
+      requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {@Content(schema = @Schema(implementation = CreateUserRequest.class))}),
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Void> createManager(@RequestBody CreateUserRequest request) {
+    log.info("Request on creating manager. Request: {}", request);
+
+    userService.createManager(request);
+
+    return Responses.created();
   }
 
 }

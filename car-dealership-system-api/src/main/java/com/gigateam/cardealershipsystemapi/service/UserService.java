@@ -15,6 +15,8 @@ public interface UserService extends UserDetailsService {
 
   void createUser(CreateUserRequest request, UserRole role);
 
+  void createManager(CreateUserRequest request);
+
   Optional<UserDto> getUserById(Long id);
 
   Long createUser(UserDto user);

@@ -44,6 +44,7 @@ public class JwtService {
         .add("id", user.getId())
         .add("name", user.getName())
         .add("surname", user.getSurname())
+        .add("role", user.getAuthorities().stream().findFirst().orElseThrow().getAuthority())
         .build();
   }
 
