@@ -13,4 +13,6 @@ public interface OrderService {
 
   List<FullOrderDto> getOrdersPage(String query, int page, int limit);
 
+  Long getOrdersCount(String query);
+
 }

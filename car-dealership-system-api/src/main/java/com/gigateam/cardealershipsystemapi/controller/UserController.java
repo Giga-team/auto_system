@@ -139,4 +139,16 @@ public class UserController extends AbstractController {
     return Responses.ok(userService.getUsersPage(query, page, limit));
   }
 
+  @GetMapping("/users/count")
+  @Operation(
+      tags = {"USER"},
+      summary = "Endpoint to retrieve users count by rsql query",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Long> getCarsCount(@RequestParam(value = "query", defaultValue = "") String query) {
+    log.info("Request on retrieving cars count. Query: {}", query);
+
+    return Responses.ok(userService.getUsersCount(query));
+  }
+
 }

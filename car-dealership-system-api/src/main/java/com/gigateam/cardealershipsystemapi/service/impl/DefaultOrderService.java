@@ -84,4 +84,9 @@ public class DefaultOrderService implements OrderService {
         .collect(Collectors.toList());
   }
 
+  @Override
+  public Long getOrdersCount(String query) {
+    return vwOrderRepository.count(query);
+  }
+
 }

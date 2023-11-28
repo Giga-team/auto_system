@@ -2,7 +2,6 @@ package com.gigateam.cardealershipsystemapi.controller;
 
 import com.gigateam.cardealershipsystemapi.common.dto.ApiResponse;
 import com.gigateam.cardealershipsystemapi.common.dto.Responses;
-import com.gigateam.cardealershipsystemapi.common.dto.car.CarDto;
 import com.gigateam.cardealershipsystemapi.common.dto.order.CreateOrderRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.order.FullOrderDto;
 import com.gigateam.cardealershipsystemapi.service.OrderService;
@@ -79,6 +78,18 @@ public class OrderController extends AbstractController {
     log.info("Request on retrieving cars page. Query: {}, page: {}, limit: {}", query, page, limit);
 
     return Responses.ok(orderService.getOrdersPage(query, page, limit));
+  }
+
+  @GetMapping("/orders/count")
+  @Operation(
+      tags = {"ORDER"},
+      summary = "Endpoint to retrieve orders count by rsql query",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Long> getOrdersCount(@RequestParam(value = "query", defaultValue = "") String query) {
+    log.info("Request on retrieving orders count. Query: {}", query);
+
+    return Responses.ok(orderService.getOrdersCount(query));
   }
 
 }

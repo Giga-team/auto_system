@@ -34,4 +34,6 @@ public interface UserService extends UserDetailsService {
 
   List<UserDto> getUsersPage(String query, int page, int limit);
 
+  Long getUsersCount(String query);
+
 }

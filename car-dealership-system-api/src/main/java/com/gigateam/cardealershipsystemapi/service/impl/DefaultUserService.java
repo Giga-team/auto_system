@@ -141,4 +141,9 @@ public class DefaultUserService implements UserService {
         .collect(Collectors.toList());
   }
 
+  @Override
+  public Long getUsersCount(String query) {
+    return repository.count(query);
+  }
+
 }
