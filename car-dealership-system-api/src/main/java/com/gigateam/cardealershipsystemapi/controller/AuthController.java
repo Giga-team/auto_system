@@ -5,6 +5,7 @@ import com.gigateam.cardealershipsystemapi.common.dto.Responses;
 import com.gigateam.cardealershipsystemapi.common.dto.auth.LoginRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.auth.LoginResponse;
 import com.gigateam.cardealershipsystemapi.common.dto.auth.CreateUserRequest;
+import com.gigateam.cardealershipsystemapi.common.dto.user.UserDto;
 import com.gigateam.cardealershipsystemapi.domain.UserRole;
 import com.gigateam.cardealershipsystemapi.exception.UnauthorizedException;
 import com.gigateam.cardealershipsystemapi.security.DefaultUserDetails;
@@ -20,6 +21,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,6 +77,24 @@ public class AuthController extends AbstractController {
     userService.createUser(request);
 
     return Responses.created();
+  }
+
+  @GetMapping("/auth/me")
+  @Operation(
+      tags = {"AUTH"},
+      summary = "Endpoint to retrieve info about logged-in user",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<UserDto> getLoggedInUser() {
+    log.info("Request on retrieving logged-in user info");
+
+    DefaultUserDetails userDetails = (DefaultUserDetails) SecurityContextHolder.getContext()
+        .getAuthentication()
+        .getPrincipal();
+
+    return Responses.ok(
+        UserDto.fromUserDetails(userDetails)
+    );
   }
 
 }
