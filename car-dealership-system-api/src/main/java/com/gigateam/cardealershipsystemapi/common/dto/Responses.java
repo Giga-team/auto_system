@@ -31,6 +31,10 @@ public final class Responses {
     return of(200, body);
   }
 
+  public static <T> ApiResponse<T> ok() {
+    return of(200, null);
+  }
+
   public static <T> ApiResponse<T> notFound() {
     return of(404);
   }

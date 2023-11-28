@@ -4,6 +4,7 @@ import com.gigateam.cardealershipsystemapi.common.dto.order.FullOrderDto;
 import com.gigateam.cardealershipsystemapi.domain.Order;
 import com.gigateam.cardealershipsystemapi.domain.OrderStatus;
 import com.gigateam.cardealershipsystemapi.exception.BadRequestException;
+import com.gigateam.cardealershipsystemapi.exception.NotFoundException;
 import com.gigateam.cardealershipsystemapi.repository.OrderRepository;
 import com.gigateam.cardealershipsystemapi.repository.VwOrderRepository;
 import com.gigateam.cardealershipsystemapi.service.CarService;
@@ -87,6 +88,28 @@ public class DefaultOrderService implements OrderService {
   @Override
   public Long getOrdersCount(String query) {
     return vwOrderRepository.count(query);
+  }
+
+  @Override
+  @Transactional
+  public void changeOrderStatus(Long orderId, OrderStatus status) {
+    validateStatusChanging(orderId, status);
+
+    orderRepository.setOrderStatus(orderId, status);
+  }
+
+  private void validateStatusChanging(Long orderId, OrderStatus status) {
+    if (status.isCancelled()) {
+      throw new BadRequestException(String.format("Manual changing status value to %s is unavailable", status));
+    }
+
+    OrderStatus oldStatus = orderRepository.findById(orderId)
+        .map(Order::getStatus)
+        .orElseThrow(() -> new NotFoundException(String.format("Order is id: %d not found", orderId)));
+
+    if (oldStatus.isCancelled()) {
+      throw new BadRequestException(String.format("Order has status: %s, so changing status value is unavailable", status));
+    }
   }
 
 }
