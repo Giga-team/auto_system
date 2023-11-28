@@ -105,4 +105,16 @@ public class UserController extends AbstractController {
     return Responses.created();
   }
 
+  @GetMapping("/users/managers/random")
+  @Operation(
+      tags = {"USER"},
+      summary = "Endpoint to retrieve random manager",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<UserDto> getRandomManager() {
+    log.info("Request on retrieving random manager");
+
+    return Responses.ok(userService.getRandomManager());
+  }
+
 }

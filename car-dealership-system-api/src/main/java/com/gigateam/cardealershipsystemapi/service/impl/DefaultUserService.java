@@ -125,4 +125,11 @@ public class DefaultUserService implements UserService {
     return !userExistsById(userId);
   }
 
+  @Override
+  public UserDto getRandomManager() {
+    return repository.findRandomManager()
+        .map(userMapper::toDto)
+        .orElseThrow(() -> new NotFoundException("There isn't any manager in database"));
+  }
+
 }

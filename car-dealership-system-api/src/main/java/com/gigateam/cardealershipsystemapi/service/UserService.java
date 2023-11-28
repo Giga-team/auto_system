@@ -29,4 +29,6 @@ public interface UserService extends UserDetailsService {
 
   boolean userNotExistsById(Long userId);
 
+  UserDto getRandomManager();
+
 }
