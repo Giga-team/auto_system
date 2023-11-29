@@ -47,6 +47,7 @@ public class DefaultCarService implements CarService {
 
     Car entity = carMapper.toEntity(car);
     entity.setId(id);
+    entity.setStatus(car.getStatus());
 
     return repository.save(entity).getId();
   }
