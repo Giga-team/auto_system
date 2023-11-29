@@ -2,16 +2,21 @@ package com.gigateam.cardealershipsystemapi.service.impl;
 
 
 import com.gigateam.cardealershipsystemapi.common.dto.car.CarDto;
+import com.gigateam.cardealershipsystemapi.common.dto.order.OrderDto;
 import com.gigateam.cardealershipsystemapi.domain.Car;
 import com.gigateam.cardealershipsystemapi.domain.CarStatus;
+import com.gigateam.cardealershipsystemapi.exception.BadRequestException;
 import com.gigateam.cardealershipsystemapi.exception.NotFoundException;
 import com.gigateam.cardealershipsystemapi.repository.CarRepository;
 import com.gigateam.cardealershipsystemapi.service.CarService;
+import com.gigateam.cardealershipsystemapi.service.OrderService;
 import com.gigateam.cardealershipsystemapi.service.mapper.CarMapper;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +26,13 @@ public class DefaultCarService implements CarService {
 
   private final CarRepository repository;
   private final CarMapper carMapper;
+  private OrderService orderService;
 
+  @Lazy
+  @Autowired
+  void setOrderService(OrderService orderService) {
+    this.orderService = orderService;
+  }
 
   @Override
   public Optional<CarDto> getCarById(Long id) {
@@ -55,6 +66,15 @@ public class DefaultCarService implements CarService {
   @Override
   @Transactional
   public boolean deleteCarById(Long id) {
+    boolean isCarOrdered = orderService.getOrdersByCarId(id).stream()
+        .anyMatch(OrderDto::isNotCancelled);
+
+    if (isCarOrdered) {
+      throw new BadRequestException(String.format("Car with id: %d is ordered", id));
+    }
+
+    orderService.deleteOrdersByCarId(id);
+
     return repository.deleteCarById(id) > 0;
   }
 

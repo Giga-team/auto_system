@@ -16,6 +16,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -71,12 +73,12 @@ public class AuthController extends AbstractController {
       requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {@Content(schema = @Schema(implementation = CreateUserRequest.class))}),
       responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ApiResponse<Void> signUp(@RequestBody CreateUserRequest request) {
+  public ResponseEntity<ApiResponse<Void>> signUp(@RequestBody CreateUserRequest request) {
     log.info("Request on sign-up. Request: {}", request);
 
     userService.createUser(request);
 
-    return Responses.created();
+    return new ResponseEntity<>(Responses.created(), HttpStatus.CREATED);
   }
 
   @GetMapping("/auth/me")

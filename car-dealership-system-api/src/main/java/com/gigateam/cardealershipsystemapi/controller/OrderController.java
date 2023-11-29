@@ -108,4 +108,18 @@ public class OrderController extends AbstractController {
     return Responses.ok();
   }
 
+  @PutMapping("/orders/{id}/cancel")
+  @Operation(
+      tags = {"ORDER"},
+      summary = "Endpoint to cancel the order",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Void> cancelOrder(@PathVariable("id") Long id) {
+    log.info("Request on cancelling the order. Order id: {}", id);
+
+    orderService.cancelOrder(id);
+
+    return Responses.ok();
+  }
+
 }

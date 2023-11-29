@@ -16,3 +16,12 @@ databaseChangeLog:
         - sqlFile:
             relativeToChangelogFile: true
             path: 0002-create-vw_orders.sql
+
+  - changeSet: # Drop unique constraint on orders table
+      id: 3
+      author: prokopchuk
+      runOnChange: true
+      changes:
+        - sqlFile:
+            relativeToChangelogFile: true
+            path: 0003-drop-unique-in-orders-table.sql
