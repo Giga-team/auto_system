@@ -2,6 +2,7 @@ package com.gigateam.cardealershipsystemapi.controller;
 
 import com.gigateam.cardealershipsystemapi.common.dto.ApiResponse;
 import com.gigateam.cardealershipsystemapi.common.dto.Responses;
+import com.gigateam.cardealershipsystemapi.common.dto.order.ChangeOrderStatusRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.order.CreateOrderRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.order.FullOrderDto;
 import com.gigateam.cardealershipsystemapi.domain.OrderStatus;
@@ -100,10 +101,10 @@ public class OrderController extends AbstractController {
       summary = "Endpoint to change status of order",
       responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
   )
-  public ApiResponse<Void> changeOrderStatus(@PathVariable("id") Long id, @RequestBody OrderStatus status) {
-    log.info("Request on changing order status. Order id: {}, status: {}", id, status);
+  public ApiResponse<Void> changeOrderStatus(@PathVariable("id") Long id, @RequestBody ChangeOrderStatusRequest request) {
+    log.info("Request on changing order status. Order id: {}, request: {}", id, request);
 
-    orderService.changeOrderStatus(id, status);
+    orderService.changeOrderStatus(id, request.getStatus());
 
     return Responses.ok();
   }
