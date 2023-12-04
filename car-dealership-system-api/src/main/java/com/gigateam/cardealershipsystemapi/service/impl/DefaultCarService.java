@@ -66,7 +66,7 @@ public class DefaultCarService implements CarService {
   @Override
   @Transactional
   public boolean deleteCarById(Long id) {
-    boolean isCarOrdered = orderService.getOrdersByCarId(id).stream()
+    boolean isCarOrdered = orderService.getOrdersByCarId(id).stream() //TODO: add status 'DELETED'
         .anyMatch(OrderDto::isNotCancelled);
 
     if (isCarOrdered) {

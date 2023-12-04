@@ -166,9 +166,22 @@ public class DefaultOrderService implements OrderService {
   }
 
   @Override
+  public List<OrderDto> getOrdersByUserId(Long userId) {
+    return orderRepository.findByUserId(userId).stream()
+        .map(orderMapper::toDto)
+        .collect(Collectors.toList());
+  }
+
+  @Override
   @Transactional
   public void deleteOrdersByCarId(Long carId) {
     orderRepository.deleteByCarId(carId);
+  }
+
+  @Override
+  @Transactional
+  public void deleteOrderByUserId(Long userId) {
+    orderRepository.deleteByUserId(userId);
   }
 
 }

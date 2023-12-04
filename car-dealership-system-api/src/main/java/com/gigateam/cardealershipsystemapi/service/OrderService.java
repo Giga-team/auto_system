@@ -23,6 +23,10 @@ public interface OrderService {
 
   List<OrderDto> getOrdersByCarId(Long carId);
 
+  List<OrderDto> getOrdersByUserId(Long userId);
+
   void deleteOrdersByCarId(Long carId);
+
+  void deleteOrderByUserId(Long userId);
 
 }

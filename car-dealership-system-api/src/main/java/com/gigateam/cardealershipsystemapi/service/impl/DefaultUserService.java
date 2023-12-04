@@ -2,6 +2,7 @@ package com.gigateam.cardealershipsystemapi.service.impl;
 
 
 import com.gigateam.cardealershipsystemapi.common.dto.auth.CreateUserRequest;
+import com.gigateam.cardealershipsystemapi.common.dto.order.OrderDto;
 import com.gigateam.cardealershipsystemapi.common.dto.user.UserDto;
 import com.gigateam.cardealershipsystemapi.domain.User;
 import com.gigateam.cardealershipsystemapi.domain.UserRole;
@@ -9,12 +10,15 @@ import com.gigateam.cardealershipsystemapi.exception.BadRequestException;
 import com.gigateam.cardealershipsystemapi.exception.NotFoundException;
 import com.gigateam.cardealershipsystemapi.repository.UserRepository;
 import com.gigateam.cardealershipsystemapi.security.DefaultUserDetails;
+import com.gigateam.cardealershipsystemapi.service.OrderService;
 import com.gigateam.cardealershipsystemapi.service.UserService;
 import com.gigateam.cardealershipsystemapi.service.mapper.UserMapper;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,6 +33,13 @@ public class DefaultUserService implements UserService {
   private final UserRepository repository;
   private final UserMapper userMapper;
   private final PasswordEncoder passwordEncoder;
+  private OrderService orderService;
+
+  @Lazy
+  @Autowired
+  void setOrderService(OrderService orderService) {
+    this.orderService = orderService;
+  }
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -114,6 +125,13 @@ public class DefaultUserService implements UserService {
   @Override
   @Transactional
   public boolean deleteUserById(Long id) {
+    boolean isActiveUser = orderService.getOrdersByUserId(id).stream()
+        .anyMatch(OrderDto::isNotCancelled);
+
+    if (isActiveUser) {
+      throw new BadRequestException(String.format("User with id: %d is active", id));
+    }
+
     return repository.deleteUserById(id) > 0;
   }
 

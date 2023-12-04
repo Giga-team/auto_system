@@ -20,7 +20,12 @@ public interface OrderRepository extends SearchRepository<Order, Long> {
 
   List<Order> findByCarId(Long carId);
 
+  List<Order> findByUserId(Long userId);
+
   @Modifying
   void deleteByCarId(Long carId);
+
+  @Modifying
+  void deleteByUserId(Long userId);
 
 }
