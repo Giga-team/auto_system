@@ -1,7 +1,10 @@
 package com.gigateam.cardealershipsystemapi.service.impl;
 
+import com.gigateam.cardealershipsystemapi.common.dto.car.CarDto;
 import com.gigateam.cardealershipsystemapi.common.dto.order.FullOrderDto;
 import com.gigateam.cardealershipsystemapi.common.dto.order.OrderDto;
+import com.gigateam.cardealershipsystemapi.common.dto.user.UserDto;
+import com.gigateam.cardealershipsystemapi.domain.Car;
 import com.gigateam.cardealershipsystemapi.domain.Order;
 import com.gigateam.cardealershipsystemapi.domain.OrderStatus;
 import com.gigateam.cardealershipsystemapi.exception.BadRequestException;
@@ -9,6 +12,7 @@ import com.gigateam.cardealershipsystemapi.exception.NotFoundException;
 import com.gigateam.cardealershipsystemapi.repository.OrderRepository;
 import com.gigateam.cardealershipsystemapi.repository.VwOrderRepository;
 import com.gigateam.cardealershipsystemapi.service.CarService;
+import com.gigateam.cardealershipsystemapi.service.EmailSenderService;
 import com.gigateam.cardealershipsystemapi.service.OrderService;
 import com.gigateam.cardealershipsystemapi.service.UserService;
 import com.gigateam.cardealershipsystemapi.service.mapper.OrderMapper;
@@ -38,6 +42,13 @@ public class DefaultOrderService implements OrderService {
     this.carService = carService;
   }
 
+  private EmailSenderService senderService;
+
+  @Autowired
+  public void setSenderService(EmailSenderService senderService) {
+    this.senderService = senderService;
+  }
+
   @Override
   @Transactional
   public Long createOrder(Long carId, Long userId) {
@@ -47,6 +58,8 @@ public class DefaultOrderService implements OrderService {
 
     Order order = constructOrder(carId, userId);
     carService.markCarAsSold(carId);
+
+    sendCarInfoToUser(carId, userId);
 
     return orderRepository.save(order).getId();
   }
@@ -70,6 +83,17 @@ public class DefaultOrderService implements OrderService {
     if (isCarAlreadyOrdered) {
       throw new BadRequestException(String.format("Car with id: %d already ordered", carId));
     }
+  }
+
+  private void sendCarInfoToUser(Long carId, Long userId) {
+    Optional<CarDto> car = carService.getCarById(carId);
+    CarDto carInfo = car.orElseThrow();
+    System.out.println(carInfo);
+    Optional<UserDto> user = userService.getUserById(userId);
+    String userEmail = user.map(u->u.getEmail()).
+            orElseThrow();
+
+    senderService.sendDetailsEmail(userEmail, carInfo);
   }
 
   private Order constructOrder(Long carId, Long userId) {
