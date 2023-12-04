@@ -44,4 +44,11 @@ public class SearchRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> impl
     return PageRequest.of(page, limit, Sort.by(ID));
   }
 
+  @Override
+  public Long count(String query) {
+    Specification<T> specification = specificationGenerator.getSpecification(query);
+
+    return super.count(specification);
+  }
+
 }

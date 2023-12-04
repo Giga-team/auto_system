@@ -2,9 +2,9 @@ package com.gigateam.cardealershipsystemapi.controller;
 
 import com.gigateam.cardealershipsystemapi.common.dto.ApiResponse;
 import com.gigateam.cardealershipsystemapi.common.dto.Responses;
-import com.gigateam.cardealershipsystemapi.common.dto.car.CarDto;
 import com.gigateam.cardealershipsystemapi.common.dto.order.CreateOrderRequest;
 import com.gigateam.cardealershipsystemapi.common.dto.order.FullOrderDto;
+import com.gigateam.cardealershipsystemapi.domain.OrderStatus;
 import com.gigateam.cardealershipsystemapi.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,6 +80,46 @@ public class OrderController extends AbstractController {
     log.info("Request on retrieving cars page. Query: {}, page: {}, limit: {}", query, page, limit);
 
     return Responses.ok(orderService.getOrdersPage(query, page, limit));
+  }
+
+  @GetMapping("/orders/count")
+  @Operation(
+      tags = {"ORDER"},
+      summary = "Endpoint to retrieve orders count by rsql query",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Long> getOrdersCount(@RequestParam(value = "query", defaultValue = "") String query) {
+    log.info("Request on retrieving orders count. Query: {}", query);
+
+    return Responses.ok(orderService.getOrdersCount(query));
+  }
+
+  @PutMapping("/orders/{id}/status")
+  @Operation(
+      tags = {"ORDER"},
+      summary = "Endpoint to change status of order",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Void> changeOrderStatus(@PathVariable("id") Long id, @RequestBody OrderStatus status) {
+    log.info("Request on changing order status. Order id: {}, status: {}", id, status);
+
+    orderService.changeOrderStatus(id, status);
+
+    return Responses.ok();
+  }
+
+  @PutMapping("/orders/{id}/cancel")
+  @Operation(
+      tags = {"ORDER"},
+      summary = "Endpoint to cancel the order",
+      responses = {@io.swagger.v3.oas.annotations.responses.ApiResponse(useReturnTypeSchema = true)}
+  )
+  public ApiResponse<Void> cancelOrder(@PathVariable("id") Long id) {
+    log.info("Request on cancelling the order. Order id: {}", id);
+
+    orderService.cancelOrder(id);
+
+    return Responses.ok();
   }
 
 }
