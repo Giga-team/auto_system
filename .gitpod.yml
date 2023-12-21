@@ -1,0 +1,13 @@
+image: gitpod/workspace-full:latest
+tasks:
+  - name: init
+    init: |
+      cd car-dealership-system-api
+      docker-compose pull
+    command: |
+      docker-compose up
+      sleep 10
+      gp sync-done start
+  - name: build
+    command: |
+      echo "Project start!"
