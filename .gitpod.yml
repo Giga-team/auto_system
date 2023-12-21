@@ -3,7 +3,6 @@ tasks:
   - name: init
     init: |
       cd car-dealership-system-api
-      bash ./run.sh
     command: |
       bash ./run.sh
   - name: build
