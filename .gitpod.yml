@@ -3,11 +3,9 @@ tasks:
   - name: init
     init: |
       cd car-dealership-system-api
-      docker-compose pull
+      bash ./run.sh
     command: |
-      docker-compose up
-      sleep 10
-      gp sync-done start
+      bash ./run.sh
   - name: build
     command: |
       echo "Project start!"
