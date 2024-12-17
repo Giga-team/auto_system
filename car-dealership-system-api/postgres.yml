@@ -7,6 +7,7 @@ services:
       - POSTGRES_USER=localdb
       - POSTGRES_DB=car-dealership-system-db
       - POSTGRES_PASSWORD=localdb
+      - USE_LATEST=true
     ports:
       - "5555:5432"
     volumes:
